@@ -1,8 +1,10 @@
 import random
 
 def code_secret(borne_min, borne_max):
+    #choix du code de maniere aléatoire
     code = random.randint(borne_min,borne_max)
     print("Entrez un nombre entre:" ,borne_min," et " ,borne_max)
+    #comparaison avec l'entrée utilisateur
     while True:
         reponse = input("choix du nombre:")
         if reponse == code:
