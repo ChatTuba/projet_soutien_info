@@ -6,21 +6,32 @@ Created on Tue Sep  5 19:23:55 2023
 """
 
 from random import randrange
-
 import os
 
+
+
 def Random(born_inf, born_max, attempt) :
+    Part = open("PART.txt", "r")
+    var = int(Part.read())
+    
     score = 0
     temp = 0
+    var += 1
     secret = randrange(born_inf,born_max)
     exist = False
 #  Verification valid born
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
         
+    print("The number of the parties is", var)
+    print("SCORE IS :", )
+        
     
     print("\nThe number is inclued in", born_inf , "and", born_max)
+    
+   
     while exist == False :
+        
         search_number = int(input("\nChoose a number  \t"))
         
 #Verification of the choosen number included the born
@@ -34,7 +45,7 @@ def Random(born_inf, born_max, attempt) :
             if again != "y":
                 return
             else:
-                Random(0, 25, 3)
+                Random(0, 25, 20)
                 
         if search_number < secret : 
             score += 1
@@ -53,14 +64,23 @@ def Random(born_inf, born_max, attempt) :
             folder.write(str(score))
             folder.close()
             again = input("\nDo you want to play again?")
-            if again != "y":
-                return 
-            else:
-                Random(0, 25, 3)
-            
-Random(0, 25,20)
+            Part = open("PART.txt", "w")
+            Part.write("")
+            Part.write(str(var))
+            Part.close()
+            if again == "y":
+                var += 1
+                
+                Random(0, 2, 20)
+            return
+               
+    
+Random(0,2,20)
+             
+
 
 # hiden file +h show file -h 
-os.system("attrib +h Score.txt")
-        
+os.system("attrib -h Score.txt")
+
+
     
