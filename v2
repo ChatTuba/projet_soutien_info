@@ -7,34 +7,60 @@ Created on Tue Sep  5 19:23:55 2023
 
 from random import randrange
 
-def Random(born_inf, born_max) :
+import os
+
+def Random(born_inf, born_max, attempt) :
     score = 0
+    temp = 0
     secret = randrange(born_inf,born_max)
     exist = False
+#  Verification valid born
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
         
     
-    print("\nThe number is inclued in 1 and 100")
+    print("\nThe number is inclued in", born_inf , "and", born_max)
     while exist == False :
         search_number = int(input("\nChoose a number  \t"))
+        
+#Verification of the choosen number included the born
+        while search_number < born_inf or search_number > born_max:
+            print ("number outside borne")
+            search_number = int(input("\nChoose a number  \t"))     
+                        
+        if temp == attempt - 1:
+            print("Out of temp")
+            again = input("\nDo you want to play again?")
+            if again != "y":
+                return
+            else:
+                Random(0, 25, 3)
                 
         if search_number < secret : 
             score += 1
+            temp += 1
             print("too small")
             
         elif search_number > secret :
             score += 1
+            temp += 1
             print("too large")
             
         else :
             print("Victory, score :", score)
-            # again = input("\nDo you want to play again?")
-            exist = True
+            folder = open("Score.txt", "a")
+            folder.write("Your score is :\t")
+            folder.write(str(score))
+            folder.close()
+            again = input("\nDo you want to play again?")
+            if again != "y":
+                return 
+            else:
+                Random(0, 25, 3)
             
-            
-            
-        
-Random(0, 100)
+Random(0, 25,20)
+
+# hiden file +h show file -h 
+os.system("attrib +h Score.txt")
         
     
