@@ -28,7 +28,12 @@ def Random(born_inf, born_max, attempt) :
         statistics=open("PART.txt", "w")
         statistics.write(str("1"))
         statistics.close
-   
+        
+    #Quit game at the begginig
+    quit = input("Do you want to quit the game? y or n ")
+    if quit == "y": 
+        return 
+    
     while exist == False :
         
         search_number = int(input("\nChoose a number  \t"))
