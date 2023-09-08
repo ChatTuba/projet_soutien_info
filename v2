@@ -1,91 +1,143 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Sep  5 19:23:55 2023
+
+@author: user
+"""
 
 from random import randrange
 import os
-
+import time
 
 
 def Random(born_inf, born_max, attempt) :
     Part = open("PART.txt", "r")
     var = int(Part.read())
-    
     score = 0
     temp = 0
     var += 1
     secret = randrange(born_inf,born_max)
     exist = False
-#  Verification valid born and reverse it if they are interverted
+
+    
+# Verification valid born and reverse it if they are interverted
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
         
-    print("The number of the parties is", var)
+    print("The number of the parties is", var, "\n")
     #print("SCORE IS :", )
-        
-    
-    print("\nThe number is inclued in", born_inf , "and", born_max)
-
-    #Quit game at the begginig
-    quit = input("Do you want to quit the game? y or n ")
-    if quit == "y": 
-        return 
-    
-    #fonction reset game
-    reset = input("Do you want to erase statistics? y or n")
+    time.sleep(1)
+    reset = input("Do you want to erase statistics? y or n \n")
     if reset == "y":
         statistics=open("PART.txt", "w")
         statistics.write(str("1"))
         statistics.close
-
-    while exist == False :
-        
-        search_number = int(input("\nChoose a number  \t"))
-        
-#Verification of the choosen number included the born
-        while search_number < born_inf or search_number > born_max:
-            print ("number outside borne")
-            search_number = int(input("\nChoose a number  \t"))     
-                        
-        if temp == attempt - 1:
-            print("Out of temp")
-            again = input("\nDo you want to play again?")
-            if again != "y":
-                return
-            else:
-                Random(0, 25, 20)
-                
-        if search_number < secret : 
-            score += 1
-            temp += 1
-            print("too small")
-            
-        elif search_number > secret :
-            score += 1
-            temp += 1
-            print("too large")
-            
-        else :
-            print("Victory, score :", score)
-            folder = open("Score.txt", "a")
-            folder.write("Your score is :\t")
-            folder.write(str(score))
-            folder.close()
-            again = input("\nDo you want to play again?")
-            Part = open("PART.txt", "w")
-            Part.write("")
-            Part.write(str(var))
-            Part.close()
-            if again == "y":
-                var += 1
-                
-                Random(0, 2, 20)
-            return
-               
+ 
+    me_or_not = input("Who wants to play ? The computer or you? \n")
     
-Random(0,2,20)
-             
+# The user plays
+    if me_or_not == "me" :
+        
+            print("\nThe number is inclued in", born_inf , "and", born_max)
+                        
+            while exist == False :
+                search_number = int(input("\nChoose a number  \t"))
+                
+#Verification of the choosen number included the born
+                while search_number < born_inf or search_number > born_max:
+                    print ("number outside borne")
+                    search_number = int(input("\nChoose a number  \t"))     
+                    
+# Stop the game if attempt is exceeded 
+                if temp == attempt - 1:
+                    print("Out of temp")
+                    again = input("\nDo you want to play again?")
+                    if again != "y":
+                        return
+                    else:
+                        Random(0, 25, 20)
+# Test number
+                        
+                if search_number < secret : 
+                    score += 1
+                    temp += 1
+                    print("too small")
+                    
+                elif search_number > secret :
+                    score += 1
+                    temp += 1
+                    print("too many")
+                    
+                else :
+                    print("Victory, score :", score)
+                    folder = open("Score.txt", "a")
+                    folder.write("Your score is :\t")
+                    folder.write(str(score))
+                    folder.close()
+                    again = input("\nDo you want to play again?")
+                    Part = open("PART.txt", "w")
+                    Part.write("")
+                    Part.write(str(var))
+                    Part.close()
+                    if again == "y":
+                        var += 1
+                        
+                        Random(0, 10, 20)
+                    return
+                
+#  The computer plays
+    elif me_or_not == "computer":
+        print("\nThe number is inclued in", born_inf , "and", born_max)
+        ia_test = randrange(born_inf, born_max)
+        
+        while exist == False :
+                
+                if ia_test < secret : 
+                    score += 1
+                    temp += 1
+                    print(ia_test)
+                    print("too small")
+                    born_inf = ia_test
+                    ia_test = randrange(ia_test, born_max )
+                    time.sleep(1)
+
+                    
+                elif ia_test > secret :
+                    score += 1
+                    temp += 1
+                    print(ia_test)
+                    print("too many")
+                    born_max = ia_test
+                    ia_test = randrange(born_inf  , ia_test ) 
+                    time.sleep(1)
+                    
+                    
+                else :
+                    print(ia_test)
+                    print(ia_test, "Victory, score :", score)
+                    folder = open("Score.txt", "a")
+                    folder.write("Your score is :\t")
+                    folder.write(str(score))
+                    folder.close()
+                    again = input("\nDo you want to play again? \n")
+                    Part = open("PART.txt", "w")
+                    Part.write("")
+                    Part.write(str(var))
+                    Part.close()
+                    if again == "y":
+                        var += 1
+                        
+                        Random(0, 100, 20)
+                    return
+            
 
 
+Random(0,100,20)
+                     
+        
+        
 # hiden file +h show file -h 
 os.system("attrib -h Score.txt")
-
-
-    
+        
+        
+            
