@@ -87,12 +87,21 @@ def Random(born_inf, born_max, attempt) :
                 
 #  The computer plays
     elif me_or_not == "computer":
+
+        print("give a number between", born_inf , "and", born_max, "\n")
+        secret_user = input("number:\n")
+        
+        while int(secret_user) < born_inf or  int(secret_user) > born_max:
+            print("give a number between", born_inf , "and", born_max)
+            secret_user = input("number:\n")            
+        time.sleep(1)
+        
         print("\nThe number is inclued in", born_inf , "and", born_max)
         ia_test = randrange(born_inf, born_max)
         
         while exist == False :
                 
-                if ia_test < secret : 
+                if ia_test < int(secret_user) : 
                     score += 1
                     temp += 1
                     print(ia_test)
@@ -102,7 +111,7 @@ def Random(born_inf, born_max, attempt) :
                     time.sleep(1)
 
                     
-                elif ia_test > secret :
+                elif ia_test > int(secret_user) :
                     score += 1
                     temp += 1
                     print(ia_test)
@@ -114,9 +123,9 @@ def Random(born_inf, born_max, attempt) :
                     
                 else :
                     print(ia_test)
-                    print(ia_test, "Victory, score :", score)
+                    print("Victory, score :", score)
                     folder = open("Score.txt", "a")
-                    folder.write("Your score is :\t")
+                    folder.write("computer score is :\t")
                     folder.write(str(score))
                     folder.close()
                     again = input("\nDo you want to play again? \n")
