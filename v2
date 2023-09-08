@@ -23,17 +23,18 @@ def Random(born_inf, born_max, attempt) :
     
     print("\nThe number is inclued in", born_inf , "and", born_max)
 
-    reset = input("Do you want to erase statistics? y or n")
-    if reset == "y":
-        statistics=open("PART.txt", "w")
-        statistics.write(str("1"))
-        statistics.close
-        
     #Quit game at the begginig
     quit = input("Do you want to quit the game? y or n ")
     if quit == "y": 
         return 
     
+    #fonction reset game
+    reset = input("Do you want to erase statistics? y or n")
+    if reset == "y":
+        statistics=open("PART.txt", "w")
+        statistics.write(str("1"))
+        statistics.close
+
     while exist == False :
         
         search_number = int(input("\nChoose a number  \t"))
