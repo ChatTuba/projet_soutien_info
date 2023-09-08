@@ -1,8 +1,7 @@
 
 from random import randrange
 import os
-
-
+#from curses import wrapper
 
 def Random(born_inf, born_max, attempt) :
     Part = open("PART.txt", "r")
@@ -13,6 +12,7 @@ def Random(born_inf, born_max, attempt) :
     var += 1
     secret = randrange(born_inf,born_max)
     exist = False
+    #stdscr = curses.initscr()
 #  Verification valid born
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
