@@ -13,16 +13,21 @@ def Random(born_inf, born_max, attempt) :
     var += 1
     secret = randrange(born_inf,born_max)
     exist = False
-#  Verification valid born
+#  Verification valid born and reverse it if they are interverted
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
         
     print("The number of the parties is", var)
-    print("SCORE IS :", )
+    #print("SCORE IS :", )
         
     
     print("\nThe number is inclued in", born_inf , "and", born_max)
-    
+
+    reset = input("Do you want to erase statistics? y or n")
+    if reset == "y":
+        statistics=open("PART.txt", "w")
+        statistics.write(str("1"))
+        statistics.close
    
     while exist == False :
         
