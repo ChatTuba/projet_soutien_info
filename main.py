@@ -5,13 +5,18 @@ Created on Tue Sep  5 19:23:55 2023
 @author: user
 """
 
+# @author user ?
+
 from random import randrange
 import os
 import time
 
+# la bonne pratique Python est la suivante :
+# Function names should be lowercase, with words separated by underscores as necessary to improve readability.
+# tout le script dans une seule fonction qui est la seule qui existe = pas bon
 
 def Random(born_inf, born_max, attempt) :
-    Part = open("PART.txt", "r")
+    Part = open("PART.txt", "r") # PART.txt n'est pas caché
     var = int(Part.read())
     score = 0
     temp = 0
@@ -19,17 +24,16 @@ def Random(born_inf, born_max, attempt) :
     secret = randrange(born_inf,born_max)
     exist = False
 
-    
 # Verification valid born and reverse it if they are interverted
     if born_inf > born_max:
         born_inf, born_max = born_max, born_inf
         
     print("The number of the parties is", var, "\n")
     #print("SCORE IS :", )
-    time.sleep(1)
+    time.sleep(1) # A ne jamais utiliser, globalement
     reset = input("Do you want to erase statistics? y or n \n")
     if reset == "y":
-        statistics=open("PART.txt", "w")
+        statistics=open("PART.txt", "w") # déjà ouvert auparavant ?
         statistics.write(str("1"))
         statistics.close
  
@@ -142,11 +146,12 @@ def Random(born_inf, born_max, attempt) :
 
 
 Random(0,100,20)
-                     
-        
+                     # indent ?
+        # indent ?
         
 # hiden file +h show file -h 
 os.system("attrib -h Score.txt")
-        
+        # indent ?
+# ceci ne fonctionne que pour Windows
         
             
